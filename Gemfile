@@ -42,6 +42,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # replacing minitest with rspec, 3.5 or newer for Rails 5 compatability
   gem 'rspec-rails', '~> 3.5.0'
+  # Use FactoryGirl for model mockups
+  gem 'factory_girl_rails'
 end
 
 group :development do
