@@ -55,6 +55,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  #gem 'launchy' # not likely to use save_and_open_page commands
+end
+
 # Use heroku for deployment
 group :production do
   gem 'pg', '~>0.20.0'
