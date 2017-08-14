@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.0'
   # Use FactoryGirl for model mockups
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 group :development do
