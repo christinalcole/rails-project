@@ -39,7 +39,7 @@ RSpec.describe Boat, type: :model do
     end
 
     it 'requires the optional rating to be an integer' do
-      boat = build(:boat, rating "seventy-two")
+      boat = build(:boat, rating: "seventy-two")
 
       expect(boat).not_to be_valid
       expect(boat.errors.full_messages).to eq(["Rating is not an integer"])

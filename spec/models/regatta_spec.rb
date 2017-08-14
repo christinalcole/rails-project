@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe.Regatta, type: :model do
+RSpec.describe Regatta, type: :model do
   describe 'validations' do
     it 'has a valid factory' do
       expect(build(:regatta)).to be_valid
