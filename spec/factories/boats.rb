@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :boat do
+    association :user, factory: :user, strategy: :build
     name    Faker::Ancient.god
     make    Faker::Ancient.titan
     length  Faker::Number.number(2)

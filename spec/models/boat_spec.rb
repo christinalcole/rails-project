@@ -8,7 +8,7 @@ RSpec.describe Boat, type: :model do
 
     it 'is not valid without a name' do
       boat = build(:boat, name: nil)
-      
+
       expect(boat).not_to be_valid
       expect(boat.errors.full_messages).to eq(["Name can't be blank"])
     end
@@ -29,7 +29,7 @@ RSpec.describe Boat, type: :model do
       boat = build(:boat, length: "seven")
 
       expect(boat).not_to be_valid
-      expect(boat.errors.full_messages).to eq(["Length is not a number"])
+      expect(boat.errors.full_messages).to eq(["Length #{boat.length} isn't a valid length. Please enter a number--e.g., 40, not forty--that is greater than 0."])
     end
 
     it 'has a rating attribute that is optional' do
@@ -38,11 +38,17 @@ RSpec.describe Boat, type: :model do
       expect(boat).to be_valid
     end
 
-    it 'requires the optional rating to be an integer' do
+    it 'requires the optional rating to be a number' do
       boat = build(:boat, rating: "seventy-two")
 
       expect(boat).not_to be_valid
-      expect(boat.errors.full_messages).to eq(["Rating is not an integer"])
+      expect(boat.errors.full_messages).to eq(["Rating is not a number"])
+    end
+    it 'requires the optional rating to be an integer' do
+      boat = build(:boat, rating: 22.5)
+
+      expect(boat).not_to be_valid
+      expect(boat.errors.full_messages).to eq(["Rating must be an integer"])
     end
   end
 
