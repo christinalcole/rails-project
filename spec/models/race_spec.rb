@@ -19,6 +19,13 @@ RSpec.describe Race, type: :model do
       expect(race).not_to be_valid
       expect(race.errors.full_messages).to eq(["Date can't be blank"])
     end
+
+    it "validates that the date isn't in the past" do
+      race = build(:race, date: "1975-04-28")
+
+      expect(race).not_to be_valid
+      expect(race.errors.full_messages).to eq(["Date can't be in the past"])
+    end
   end
 
   describe 'associations' do
