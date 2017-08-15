@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe Boat, type: :model do
   describe 'validations' do
     it 'has a valid factory' do
-      expect(build(:user)).to be_valid
+      expect(build(:boat)).to be_valid
     end
 
     it 'is not valid without a name' do
       boat = build(:boat, name: nil)
-
+      
       expect(boat).not_to be_valid
       expect(boat.errors.full_messages).to eq(["Name can't be blank"])
     end
