@@ -26,12 +26,12 @@ RSpec.describe Regatta, type: :model do
     end
 
     it 'allows start date and end date to be the same' do
-      regatta = build(:regatta, start_date: 2017-06-21, end_date: 2017-06-21)
+      regatta = build(:regatta, start_date: "2017-06-21", end_date: "2017-06-21")
 
       expect(regatta).to be_valid
     end
     it 'does not allow a start date to be after an end date' do
-      regatta = build(:regatta, start_date: 2017-06-21, end_date: 2017-06-19)
+      regatta = build(:regatta, start_date: "2017-06-21", end_date: "2017-06-19")
 
       expect(regatta).not_to be_valid
       expect(regatta.errors.full_messages).to eq(["Start date can't be after end date"])
