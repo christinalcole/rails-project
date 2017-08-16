@@ -53,9 +53,24 @@ RSpec.describe Boat, type: :model do
   end
 
   describe 'assocations' do
-    it 'belongs to an owner'
-    it 'belongs to a race'
-    it 'has many race_crews'
-    it 'has many crew through race_crews'
+      it 'belongs to an owner' do
+        relationship = Boat.reflect_on_association(:owner)
+        expect(relationship.macro).to eq(:belongs_to)
+      end
+
+      it 'belongs to a race' do
+        relationship = Boat.reflect_on_association(:race)
+        expect(relationship.macro).to eq(:belongs_to)
+      end
+
+      it 'has many race_crews' do
+        relationship = Boat.reflect_on_association(:race_crews)
+        expect(relationship.macro).to eq(:has_many)
+      end
+
+      xit 'has many crew through race_crews' do
+        crew_relationship = Boat.reflect_on_association(:crew)
+        crew_relationship.through_reflection
+    end
   end
 end
