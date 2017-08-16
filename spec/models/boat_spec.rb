@@ -68,8 +68,8 @@ RSpec.describe Boat, type: :model do
         expect(relationship.macro).to eq(:has_many)
       end
 
-      xit 'has many crew through race_crews' do
-        crew_relationship = Boat.reflect_on_association(:crew)
+      xit 'has many crews through race_crews' do
+        crew_relationship = Boat.reflect_on_association(:crews)
         crew_relationship.through_reflection
     end
   end

@@ -15,8 +15,19 @@ RSpec.describe Position, type: :model do
   end
 
   describe 'associations' do
-    it 'belongs to a user'
-    it 'has many race_crews'
-    it 'has many crew through race_crews'
+    it 'belongs to a user' do
+      relationship = Position.reflect_on_association(:user)
+      expect(relationship.macro).to eq(:belongs_to)
+    end
+
+    it 'has many race_crews' do
+      relationship = Position.reflect_on_association(:race_crews)
+      expect(relationship.macro).to eq(:has_many)
+    end
+
+    it 'has many crews through race_crews' do
+      crew_relationship = Position.reflect_on_association(:crews)
+      crew_relationship.through_reflection
+    end
   end
 end
