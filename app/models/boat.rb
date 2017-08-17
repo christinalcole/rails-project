@@ -1,6 +1,7 @@
 class Boat < ApplicationRecord
-  belongs_to :user
+  belongs_to :owner, :class_name => "User"
   belongs_to :race, optional: true
+  has_many :race_crews
 
   validates :name, :make, :length, presence: true
   validates :rating, numericality: {only_integer: true, allow_nil: true}

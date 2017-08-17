@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807154005) do
+ActiveRecord::Schema.define(version: 20170817030043) do
 
   create_table "boats", force: :cascade do |t|
     t.string   "name"
     t.string   "make"
     t.integer  "length"
     t.integer  "rating"
-    t.integer  "user_id"
+    t.integer  "owner_id"
     t.integer  "race_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_boats_on_owner_id"
     t.index ["race_id"], name: "index_boats_on_race_id"
-    t.index ["user_id"], name: "index_boats_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
