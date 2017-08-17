@@ -43,10 +43,10 @@ RSpec.describe Regatta, type: :model do
       relationship = Regatta.reflect_on_association(:races)
       expect(relationship.macro).to eq(:has_many)
     end
-    
+
     it 'has many boats through races' do
       boat_relationship = Regatta.reflect_on_association(:boats)
-      boat_relationship.through_reflection
+      expect(boat_relationship.through_reflection.name).to eq(:races)
     end
   end
 end

@@ -1,4 +1,7 @@
 class Regatta < ApplicationRecord
+  has_many :races
+  has_many :boats, through: :races
+   
   validates :name, :start_date, :end_date, presence: true
   validate :start_date_cannot_be_after_end_date
 
