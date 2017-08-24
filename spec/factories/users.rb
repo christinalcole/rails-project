@@ -5,5 +5,6 @@ FactoryGirl.define do
     email         Faker::Internet.email
     phone_number  Faker::PhoneNumber.cell_phone
     weight        Faker::Number.between(85, 250)
+    password      Faker::Internet.password(8)
   end
 end
