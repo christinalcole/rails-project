@@ -1,26 +1,26 @@
 require 'rails_helper'
 
-RSpec.feature 'Sign in', type: :devise do
+feature 'Sign in', :devise do
   scenario 'a user cannot sign in if not registered' do
-    sign_in('test@example.com', 'please123')
+    signin('test@example.com', 'please123')
     expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
   end
 
   scenario 'a user can sign in with valid credentials' do
     user = FactoryGirl.create(:user)
-    sign_in(user.email, user.password)
+    signin(user.email, user.password)
     expect(page).to have_content I18n.t 'devise.sessions.signed_in'
   end
 
   scenario 'a user cannot sign in with a wrong email' do
     user = FactoryGirl.create(:user)
-    sign_in('invalid@email.com', user.password)
+    signin('invalid@email.com', user.password)
     expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
   end
 
   scenario 'a user cannot sign in with wrong password' do
     user = FactoryGirl.create(:user)
-    sign_in(user.email, 'invalidpass')
+    signin(user.email, 'invalidpass')
     expect(page).to have_content I18n.t 'devise.failure.invalid', authentication_keys: 'email'
   end
 end
