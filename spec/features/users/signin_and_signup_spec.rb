@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Sign in', :devise do
+RSpec.feature 'Sign in', :devise do
   scenario 'a user cannot sign in if not registered' do
     signin('test@example.com', 'please123')
     expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
@@ -25,7 +25,7 @@ feature 'Sign in', :devise do
   end
 end
 
-RSpec.feature 'Sign up', type: :devise do
+RSpec.feature 'Sign up', :devise do
   scenario 'a user cannot sign up if already registerd'
   scenario 'a user can sign up with valid credentials'
   scenario 'a user cannot sign up without an email'
