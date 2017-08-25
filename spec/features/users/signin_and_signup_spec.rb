@@ -29,7 +29,7 @@ RSpec.feature 'Sign up', :devise do
   scenario 'a user cannot sign up if already registerd'
   scenario 'a user can sign up with valid credentials' do
     user = FactoryGirl.build(:user)
-    signup(user.email, user.password)
+    signup(user.first_name, user.last_name, user.phone_number, user.weight, user.email, user.password)
     expect(page).to have_content I18n.t 'devise.registrations.signed_up'
   end
   scenario 'a user cannot sign up without an email'
