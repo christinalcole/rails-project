@@ -13,8 +13,10 @@ Specs:
     - User, Boat, Position, Race, Regatta have validations on model attributes
 - [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
 - [ ] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
-- [ ] Include signup (how e.g. Devise)
-- [ ] Include login (how e.g. Devise)
+- [x] Include signup (how e.g. Devise)
+    - Signup uses Devise gem
+- [x] Include login (how e.g. Devise)
+    - Login uses Devise gem
 - [ ] Include logout (how e.g. Devise)
 - [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
 - [ ] Include nested resource show or index (URL e.g. users/2/recipes)
