@@ -22,3 +22,6 @@
 
 # Ignore Notes file used for organizing project
 Notes.md
+
+# Ignore dotenv
+.env

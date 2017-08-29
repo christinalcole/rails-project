@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -37,6 +39,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Devise for authentication
 gem 'devise'
+
+# oAuth gems
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Use sqlite3 as the database for development, testing
