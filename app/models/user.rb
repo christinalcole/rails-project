@@ -21,4 +21,17 @@ class User < ApplicationRecord
       user.last_name = auth.info.last_name
     end
   end
+
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      # binding.pry
+      new session["devise.user_attributes"] do |user|
+        # binding.pry
+        user.attributes = params
+        user.valid?
+      end
+    else
+      super
+    end
+  end
 end
