@@ -24,14 +24,16 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
-      # binding.pry
       new session["devise.user_attributes"] do |user|
-        # binding.pry
         user.attributes = params
         user.valid?
       end
     else
       super
     end
+  end
+
+  def password_required? #overrides validation requirement for user sign-up to give password when using OmniAuth
+    super && provider.blank?
   end
 end
