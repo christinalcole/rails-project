@@ -18,5 +18,25 @@ module Features
         fill_in 'Password confirmation', with: password
         click_button 'Sign up'
       end
+
+      def stub_omniauth
+        OmniAuth.config.test_mode = true #sets OmniAuth to run in test model
+        OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+            provider: 'facebook',
+            uid: '1234567',
+            info: {
+              email: 'barnaclebill@davyjones.com',
+              name: 'Barnacle Bill',
+              first_name: 'Barnacle',
+              last_name: 'Bill',
+              verified: true
+            },
+            credentials: {
+              token: 'ABCDEFGHIJKLMNO',
+              expires_at: DateTime.now,
+              expires: true
+            }
+          })
+        end
     end
   end
