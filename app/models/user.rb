@@ -22,7 +22,7 @@ class User < ApplicationRecord
     end
   end
 
-  def self.new_with_session(params, session)
+  def self.new_with_session(params, session) #if user signup via OmniAuth fails model validations, provide error messages for user to make corrections
     if session["devise.user_attributes"]
       new session["devise.user_attributes"] do |user|
         user.attributes = params
