@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'user signs up' do
+RSpec.feature 'user signs up', type: :feature do
   scenario 'using facebook oauth, user is directed to sign up form to fill in missing information' do
     stub_omniauth
 
