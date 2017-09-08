@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.feature 'Position Management' do
   context 'nested resource' do
     it 'has an index page nested under a user' do
-      visit user_position_path
-      expect(page.status.code).to eq(200)
+      user = create(:user)
+      visit user_positions_path(user.id)
+      expect(page.status_code).to eq(200)
     end
     it 'lists the positions of the logged-in user'
   end
