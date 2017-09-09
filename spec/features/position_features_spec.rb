@@ -1,31 +1,27 @@
 require 'rails_helper'
 
-RSpec.feature 'Position Management' do
-  context 'nested resource' do
-    it 'has an index page nested under a user' do
+RSpec.feature 'Users and Positions', type: :feature do
+  context 'as a logged-in user' do
+    it 'has an add-position page nested under a user' do
       user = create(:user)
-      visit user_positions_path(user.id)
+      visit new_user_position_path(user.id)
       expect(page.status_code).to eq(200)
     end
-    it 'lists the positions of the logged-in user'
   end
 
   context 'user wants to add positions to their profile' do
     scenario 'there is a link to add new position(s)' do
-      visit user_position_path
+      user = create(:user)
+      visit user_path(user.id)
       expect(page).to have_link("Add Crew Positions")
     end
     scenario 'there is no link to add position(s) if a user profile already has positions'
     scenario 'there is a form to add new position(s)' do
-      visit user_position_path
+      visit user_path
       click_link("Add Crew Positions")
       expect(page).to have(css"form#new_position")
     end
-    scenario 'the form should display existing positions in the db' do
-      position = create(:position)
-      visit new_user_position_path
-      expect(page).to have_content(postion.name)
-    end
+    scenario 'the form should display existing positions in the db'
     scenario 'the user should gain new position(s) after the form is submitted'
   end
 
@@ -36,4 +32,5 @@ RSpec.feature 'Position Management' do
     scenario 'the form should display positions already listed in the user profile'
     scenario 'the list of positions for a user should update after the form is submitted'
   end
+
 end
