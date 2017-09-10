@@ -9,4 +9,6 @@ Rails.application.routes.draw do
       resources :positions
     end
   end
+
+  resources :positions, except: [:show]
 end
