@@ -1,5 +1,5 @@
 <h2>Positions entered to the database: </h2>
 
 <% @positions.each do |position| %>
-  <%= position.name %>
+  <%= position.name %> | <%= link_to "Edit", edit_position_path(position.id) %> | <%= link_to "Delete", position, method: :delete, data:{confirm: "Are you sure?"} %>
 <% end %>

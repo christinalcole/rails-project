@@ -17,11 +17,39 @@ RSpec.feature 'Positions Management', type: :feature do
   end
 
   context 'editing positions' do
-    scenario 'an existing position can be updated'
-    scenario 'an existing position can be removed'
+    scenario 'an existing position can be updated' do
+      position = FactoryGirl.create(:position, name: "gib trim")
+
+      visit edit_position_path(position.id)
+      expect(page).to have_css("form#edit_position_#{position.id}")
+
+      fill_in 'position[name]', with: 'Jib Trim'
+      click_button 'Update Position'
+
+      expect(Position.first.name).to eq("Jib Trim")
+      expect(page).to have_content("Jib Trim")
+    end
+
+
+    scenario 'an existing position can be removed' do
+      position = FactoryGirl.create(:position)
+
+      visit positions_path
+      click_link "Delete"
+
+      expect(Position.count).to eq(0)
+      expect(current_path).to eq(positions_path)
+    end
   end
 
   context 'listing positions' do
-    scenario 'existing positions in the database can be listed'
+    scenario 'existing positions in the database can be listed' do
+      position1 = FactoryGirl.create(:position)
+      position2 = FactoryGirl.create(:position)
+
+      visit positions_path
+      expect(page).to have_content("#{position1.name}")
+      expect(page).to have_content("#{position2.name}")
+    end
   end
 end

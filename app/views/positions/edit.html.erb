@@ -1,0 +1,18 @@
+<hr>positions#edit<hr>
+
+<% if @position.errors.any?%>
+  <h3><%= pluralize(@position.errors.count, "error") %> occurred: </h3>
+  <% @position.errors.full_messages.each do |msg| %>
+    <ul>
+      <li><%= msg %></li>
+    </ul>
+    <% end %>
+<% end %>
+
+<h2>Edit This Position:</h2>
+<%= form_for @position do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+<% end %>
