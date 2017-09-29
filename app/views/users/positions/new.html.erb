@@ -1,0 +1,11 @@
+users/positions#new <br></br>
+
+
+<h2>Add positions to your profile:</h2>
+<%= form_for [:user, @position] do |f| %>
+  <%= f.fields_for :positions_users do |p| %>
+    <%= p.collection_check_boxes(:position_id, Position.all, :id, :name) %>
+    <% end %>
+  <!-- <%= f.collection_check_boxes(:positions_user_ids, Position.all, :id, :name) %> -->
+  <%= f.submit %>
+  <% end %>

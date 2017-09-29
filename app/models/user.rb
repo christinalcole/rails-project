@@ -39,4 +39,8 @@ class User < ApplicationRecord
   def password_required? #overrides validation requirement for user sign-up to give password when using OmniAuth
     super && provider.blank?
   end
+
+  def name
+    self.first_name + " " + self.last_name
+  end
 end

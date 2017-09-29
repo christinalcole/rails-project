@@ -1,0 +1,12 @@
+<hr>
+user#show
+
+<h2><%= @user.name %>'s positions</h2>
+<ul>
+  <% @user.positions.each do |position| %>
+    <li><%= position.name %> </li>
+  <% end %>
+</ul>
+
+
+<%=link_to "Add Crew Positions", new_user_position_path(current_user) %>
