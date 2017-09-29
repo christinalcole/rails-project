@@ -62,5 +62,6 @@ RSpec.configure do |config|
 
   #support for Devise
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include Features::SessionHelpers, type: :feature
 end
