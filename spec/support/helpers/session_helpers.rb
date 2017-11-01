@@ -37,6 +37,6 @@ module Features
               expires: true
             }
           })
-        end
+      end
     end
   end

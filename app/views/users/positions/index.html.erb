@@ -1,0 +1,11 @@
+<hr>
+user::positions#index
+
+<h2><%= current_user.name %>'s positions</h2>
+<ul>
+  <% current_user.positions.each do |position| %>
+    <li><%= position.name %> </li>
+  <% end %>
+</ul>
+
+<%=link_to "Manage Positions", edit_user_path(current_user) %>

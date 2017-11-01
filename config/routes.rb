@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :users do
     scope module: :users do
-      resources :positions
+      resources :positions, only: [:index]
     end
   end
 
