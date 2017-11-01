@@ -4,7 +4,7 @@ RSpec.feature 'Users and Positions', type: :feature do
   context 'as a logged-in user' do
     it 'has a position index page nested under a user' do
       user = create(:user)
-      
+
       visit user_positions_path(user.id)
       expect(page.status_code).to eq(200)
     end
@@ -24,23 +24,25 @@ RSpec.feature 'Users and Positions', type: :feature do
     scenario 'there is a form to update positions associated with user profile' do
       user = create(:user)
       signin(user.email, user.password)
-      # visit user_path(user.id)
-      # click_link("Add Crew Positions")
-      # expect(page).to have_css("form#new_position")
+      visit user_positions_path(user.id)
+      click_link("Manage Positions")
+      expect(page).to have_css("form#edit_user_#{user.id}")
     end
 
     scenario 'the form should display existing positions in the db' do
-      # position1 = create(:position)
-      # position2 = create(:position)
-      # user = create(:user)
-      # signin(user.email, user.password)
-      # visit new_user_position_path(user.id)
-      #
-      # expect(page).to have_content(position1.name)
-      # expect(page).to have_content(position2.name)
+      position1 = create(:position)
+      position2 = create(:position)
+      user = create(:user)
+      signin(user.email, user.password)
+      visit edit_user_path(user.id)
+
+      expect(page).to have_content(position1.name)
+      expect(page).to have_content(position2.name)
     end
 
-    scenario 'the user should gain new position(s) after the form is submitted' do
+    scenario 'the form should display positions already listed in the user profile'
+
+    scenario 'the list of positions for a user should update after the form is submitted' do
       # position1 = create(:position)
       # position2 = create(:position)
       # user = create(:user)
@@ -53,13 +55,4 @@ RSpec.feature 'Users and Positions', type: :feature do
       # expect(user.positions).to include(position1)
     end
   end
-
-  context 'user wants to update positions in their profile' do
-    scenario 'there is a link to update positions'
-    scenario 'there is no link to update positions if a user profile has no positions'
-    scenario 'there is a form to update position(s)'
-    scenario 'the form should display positions already listed in the user profile'
-    scenario 'the list of positions for a user should update after the form is submitted'
-  end
-
 end
