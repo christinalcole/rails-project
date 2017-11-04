@@ -19,8 +19,6 @@ RSpec.feature 'Users and Positions', type: :feature do
       expect(page).to have_link("Manage Positions")
     end
 
-    scenario 'there is no link to add position(s) if a user profile already has positions'
-
     scenario 'there is a form to update positions associated with user profile' do
       user = create(:user)
       signin(user.email, user.password)
@@ -40,19 +38,32 @@ RSpec.feature 'Users and Positions', type: :feature do
       expect(page).to have_content(position2.name)
     end
 
-    scenario 'the form should display positions already listed in the user profile'
+    scenario 'the form should indicate which position(s) are already listed in the user profile' do
+      position1 = create(:position)
+      position2 = create(:position)
+      user = create(:user)
+      user.positions << position1
+
+      signin(user.email, user.password)
+      visit edit_user_path(user.id)
+
+      expect(page).to have_field("user_position_ids_#{position1.id}", checked: true)
+      expect(page).to have_field("user_position_ids_#{position2.id}", checked: false)
+    end
 
     scenario 'the list of positions for a user should update after the form is submitted' do
-      # position1 = create(:position)
-      # position2 = create(:position)
-      # user = create(:user)
-      # signin(user.email, user.password)
-      # visit new_user_position_path(user.id)
-      #
-      # page.check(position1.name)
-      # click_button("Create Position")
-      #
-      # expect(user.positions).to include(position1)
+      position1 = create(:position)
+      position2 = create(:position)
+      user = create(:user)
+      user.positions << position1
+
+      signin(user.email, user.password)
+      visit edit_user_path(user.id)
+
+      page.check(position2.name)
+      click_button("Update Position(s)")
+
+      expect(user.positions).to include(position1, position2)
     end
   end
 end
