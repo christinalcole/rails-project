@@ -56,9 +56,21 @@ RSpec.describe User, type: :model do
         race_relationship = User.reflect_on_association(:races)
         expect(race_relationship.through_reflection.name).to eq(:race_crews)
       end
-      it 'has many positions through race_crews' do
+      it 'has many race_positions through race_crews' do
+        race_position_relationship = User.reflect_on_association(:race_positions)
+        expect(race_position_relationship.through_reflection.name).to eq(:race_crews)
+      end
+    end
+
+    context 'as user' do
+      it 'has many positions_users' do
+        relationship = User.reflect_on_association(:positions_users)
+        expect(relationship.macro). to eq(:has_many)
+      end
+
+      it 'has many positions through positions_users' do
         position_relationship = User.reflect_on_association(:positions)
-        expect(position_relationship.through_reflection.name).to eq(:race_crews)
+        expect(position_relationship.through_reflection.name).to eq(:positions_users)
       end
     end
   end
