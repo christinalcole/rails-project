@@ -38,8 +38,12 @@ RSpec.feature 'Boats Management', type: :feature do
 
       expect(page.status_code).to eq(200)
     end
-    scenario 'an index page of all boats in the db exists'
-    scenario 'a page to add a new boat that is not nested under the current user does not exist'
+    scenario 'an index page of all boats in the db exists' do
+      visit boats_path
+
+      expect(page.status_code).to eq(200)
+    end
+    scenario 'a page to add a new boat that is not nested under the current user does not exist' 
     scenario 'a page to edit a specific boat that is not nested under the current user does not exist'
   end
 

@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   resources :users do
     scope module: :users do
       resources :positions, only: [:index]
+      resources :boats
     end
   end
 
   resources :positions, except: [:show]
+
+  resources :boats, only: [:index, :show]
+
 end
