@@ -1,0 +1,13 @@
+<hr>
+users::boats#index
+
+<h2><%= current_user.name %>'s boats</h2>
+<ul>
+  <% @boats.each do |boat| %>
+    <li>
+      <%= boat.name %> | <%= boat.make %> | <%= boat.length %> | <%= boat.rating %> | <%= link_to "Delete", [current_user, boat], method: :delete, data:{confirm: "Are you sure?"} %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Add a new boat", new_user_boat_path(current_user.id) %>

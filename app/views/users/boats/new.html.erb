@@ -1,1 +1,31 @@
-user::boats#new
+user::boats#new <br></br>
+
+<% if @boat.errors.any? %>
+<h3><%= pluralize(@boat.errors.count, "error") %> occurred: </h3>
+  <% @boat.errors.full_messages.each do |msg| %>
+    <ul>
+      <li><%= msg %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<h2>Own a new boat?  Add its details here:</h2>
+  <%= form_for [:user, @boat] do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <br/>
+
+    <%= f.label :make %>
+    <%= f.text_field :make %>
+    <br/>
+
+    <%= f.label :length %>
+    <%= f.number_field :length %>
+    <br/>
+
+    <%= f.label :rating %>
+    <%= f.number_field :rating%>
+    <br/>
+
+    <%= f.submit %>
+  <% end %>

@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
   <ul>
-    <li><%= link_to "Crew Positions", user_positions_path(current_user)%></li>
+    <li><%= link_to "Crew Positions", user_positions_path(current_user) %></li>
+    <li><%= link_to "Boat Management", user_boats_path(current_user) %></li>
   </ul>
 <% end %>

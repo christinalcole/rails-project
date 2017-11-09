@@ -43,18 +43,26 @@ RSpec.feature 'Boats Management', type: :feature do
 
       expect(page.status_code).to eq(200)
     end
-    scenario 'a page to add a new boat that is not nested under the current user does not exist' 
+    scenario 'a page to add a new boat that is not nested under the current user does not exist'
     scenario 'a page to edit a specific boat that is not nested under the current user does not exist'
   end
 
   context 'create boats' do
     scenario 'a form exists to add a new boat to the db' do
-      visit new_boat_path
+      user = create(:user)
+      signin(user.email, user.password)
+      visit new_user_boat_path(user.id)
+
       expect(page).to have_css('form#new_boat')
     end
     scenario 'a new boat is created when the form is submitted' do
-      visit new_boat_path
+      user = create(:user)
+      signin(user.email, user.password)
+      visit new_user_boat_path(user.id)
+
       fill_in 'boat[name]', with: 'Sea Witch'
+      fill_in 'boat[make]', with: 'J105'
+      fill_in 'boat[length]', with: '10'
       click_button 'Create Boat'
 
       expect(Boat.last.name).to eq("Sea Witch")
@@ -64,9 +72,11 @@ RSpec.feature 'Boats Management', type: :feature do
 
   context 'editing boats' do
     scenario 'an existing boat can be updated' do
-      boat = FactoryGirl.create(:boat, name: "Feelin Good")
+      user = create(:user)
+      boat = FactoryGirl.create(:boat, name: "Feelin Good", owner_id: user.id)
+      signin(user.email, user.password)
+      visit edit_user_boat_path(user.id, boat.id)
 
-      vist edit_boat_path(boat.id)
       expect(page).to have_css("form#edit_boat_#{boat.id}")
 
       fill_in 'boat[name]', with: 'Feline Good'
@@ -77,13 +87,15 @@ RSpec.feature 'Boats Management', type: :feature do
     end
 
     scenario 'an existing boat can be removed' do
-      boat = FactoryGirl.create(:boat)
+      user = create(:user)
+      boat = FactoryGirl.create(:boat, owner_id: user.id)
+      signin(user.email, user.password)
 
-      visit boats_path
+      visit user_boats_path(user.id)
       click_link "Delete"
 
       expect(Boat.count).to eq(0)
-      expect(current_path).to eq(boats_path)
+      expect(current_path).to eq(user_boats_path(user.id))
     end
   end
 
