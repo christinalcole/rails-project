@@ -7,3 +7,5 @@
 3. User should not be able to automatically add self to crew: User should instead be able to 'wishlist' as crew, and the owner will be required to 'add' wishlisted users to official crew for race event (prevents owner from having a crew larger than desired based on race conditions (e.g.)).
 
 4. User should only be able to add self to a crew position that is also in their profile (e.g., can't add self as main trimmer unless that ability in already listed in user's profile) and/or app should prompt user to update profile at same time.
+
+5. User can see a list of boats on which user has been crew (e.g., user.race_boats, through race_crew)
