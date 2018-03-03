@@ -43,4 +43,14 @@ class User < ApplicationRecord
   def name
     self.first_name + " " + self.last_name
   end
+
+  # def position_ids=(pos_ids)
+  #   pos_ids.each do |id|
+  #     self.positions << Position.find_by(id: id) if id !=""
+  #   end
+  # end
+
+  # def positions=(position)
+  #   self.positions << Position.find_by(name: position[:name])
+  # end
 end
