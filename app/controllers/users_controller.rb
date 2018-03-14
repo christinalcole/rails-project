@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
 
-  def edit
+  def edit #allow user to update positions on profile
+    @positions = Position.all
   end
 
   def update
+    raise params.inspect
     if current_user.update(user_params)
       redirect_to user_positions_path(current_user)
     else

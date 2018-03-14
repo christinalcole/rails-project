@@ -4,6 +4,14 @@ users#edit <br></br>
 <h2>Update positions on your profile:</h2>
 
 <%= form_for current_user do |f| %>
-  <%= f.collection_check_boxes(:position_ids, Position.all, :id, :name) %>
+  <% @positions.each do |position| %>
+    <%= f.fields_for :positions_users, f.object.positions_users do |p_fields| %>
+      <%= p_fields.check_box :position_id, {id: "position_#{position.id}"}, position.id, nil %>
+      <%= p_fields.label :name, position.name, for: "position_#{position.id}" %>
+      <%= p_fields.label :skill_level %>
+      <%= p_fields.number_field :skill_level %>
+    <% end %>
+  <% end %>
   <%= f.submit "Update Position(s)" %>
 <% end %>
+<br><br/>
