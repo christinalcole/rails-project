@@ -6,12 +6,16 @@ Rails.application.routes.draw do
 
   resources :users do
     scope module: :users do
-      resources :positions, only: [:index]
+      resources :positions, only: [:index, :create, :new]
       resources :boats
     end
   end
 
-  resources :positions, except: [:show]
+  resources :positions, except: [:show] do
+    scope module: :positions do
+      resources :users, only: [:index]
+    end
+  end
 
   resources :boats, only: [:index, :show]
 
