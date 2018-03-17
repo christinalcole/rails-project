@@ -4,6 +4,15 @@ class Users::PositionsController < ApplicationController
   def index
   end
 
+  def new
+    positions_users = current_user.positions_users
+    Position.find_each do |position|
+      unless positions_users.detect {|pu| pu.position_id == position.id}
+        current_user.positions_users.build(position_id: position.id)
+      end
+    end
+  end
+
   # def new
   #   @position = Position.new
   #   @position.positions_users.build
