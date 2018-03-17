@@ -8,4 +8,6 @@ user::positions#index
   <% end %>
 </ul>
 
-<%=link_to "Manage Positions", edit_user_path(current_user) %>
+
+<%= link_to "Add Positions", new_user_position_path(current_user) %>
+<%= link_to "Manage Positions", edit_user_path(current_user) %>
