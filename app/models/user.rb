@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, :phone_number, :weight, presence: true
 
+  accepts_nested_attributes_for :positions_users
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.id).first_or_create do |user|
       user.email = auth.info.email
