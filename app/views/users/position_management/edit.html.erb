@@ -1,0 +1,15 @@
+<hr>
+user::position_management#edit
+
+
+<h2>Manage the positions on your profile:</h2>
+
+<%= form_for current_user, url: user_position_management_path do |f| %>
+  <%= f.fields_for :positions_users do |pu| %>
+      <%= check_box_tag "user[position_ids][]", :position_id, current_user.positions.include?(pu.object.position) %>
+      <%= pu.object.position.name %>
+      <%= pu.label :skill_level %>
+      <%= pu.number_field :skill_level %><br>
+    <% end %>
+  <%= f.submit "Manage Position(s)" %>
+<% end %>
