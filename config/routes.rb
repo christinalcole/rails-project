@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   resources :users do
     scope module: :users do
-      resources :positions, only: [:index, :create, :new]
+      get '/position-management', to: 'position_management#edit'  # Gives /users/:user_id/position-management(.:format) users/position_management#edit
+      patch '/position-management', to: 'position_management#update'
+      put '/position-management', to: 'position_management#update'
+      resources :positions, only: [:index]
       resources :boats
     end
   end
