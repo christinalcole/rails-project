@@ -10,7 +10,7 @@ RSpec.feature 'Users and Positions', type: :feature do
     end
   end
 
-  context 'user wants to add positions to their profile' do
+  xcontext 'user wants to add positions to their profile' do
     scenario 'there is a link to add new positions' do
       user = create(:user)
       signin(user.email, user.password)
@@ -50,26 +50,29 @@ RSpec.feature 'Users and Positions', type: :feature do
       signin(user.email, user.password)
 
       visit user_positions_path(user.id)
+
       expect(page).to have_link("Manage Positions")
     end
 
-    xscenario 'there is a form to update positions associated with user profile' do
+    scenario 'there is a form to update positions associated with user profile' do
       user = create(:user)
       signin(user.email, user.password)
+
       visit user_positions_path(user.id)
       click_link("Manage Positions")
+
       expect(page).to have_css("form#edit_user_#{user.id}")
     end
 
-    xscenario 'the form should display existing positions in the db' do
+    scenario 'the form should display existing positions in the db' do
       position1 = create(:position)
       position2 = create(:position)
       user = create(:user)
 
-      PositionsUser.create(user_id: user.id, position_id: position1.id, skill_level: 3)
+      # PositionsUser.create(user_id: user.id, position_id: position1.id, skill_level: 3)
       binding.pry
       signin(user.email, user.password)
-      visit edit_user_path(user.id)
+      visit user_position_management_path(user.id)
 
       expect(page).to have_content(position1.name)
       expect(page).to have_content(position2.name)
