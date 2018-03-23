@@ -113,7 +113,7 @@ RSpec.feature 'Users and Positions', type: :feature do
       visit user_position_management_path(user.id)
 
       page.check(position2.name)
-      click_button("Update User")
+      click_button("Manage Position(s)")
 
       expect(user.positions).to include(position1, position2)
     end
