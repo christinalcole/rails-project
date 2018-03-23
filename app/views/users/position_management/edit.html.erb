@@ -7,7 +7,7 @@ user::position_management#edit
 
 
 <hr></br>
-<%= form_for current_user do |f| %>
+<%= form_for current_user, url: user_position_management_path do |f| %>
   <% @positions.each do |position| %>
     <%= f.fields_for :positions_users, PositionsUser.new do |pu_fields| %>
       <%= pu_fields.check_box :position_id, {id: "position_#{position.id}"}, position.id, nil %>
