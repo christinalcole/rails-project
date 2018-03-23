@@ -4,12 +4,22 @@ user::position_management#edit
 
 <h2>Manage the positions on your profile:</h2>
 
+
+
+<hr></br>
 <%= form_for current_user, url: user_position_management_path do |f| %>
   <%= f.fields_for :positions_users do |pu| %>
-      <%= check_box_tag "user[position_ids][]", :position_id, current_user.positions.include?(pu.object.position) %>
-      <%= pu.object.position.name %>
-      <%= pu.label :skill_level %>
-      <%= pu.number_field :skill_level %><br>
+    <%= hidden_field_tag "user[positions_users][][position_id]", nil%>
+    <%= check_box_tag "user[positions_users][][position_id]", pu.object.position.id %>
+    <%= label_tag pu.object.position.name %>
+    <%= label_tag "skill level" %>
+    <%= number_field_tag "user[positions_users][][skill_level]" %><br>
     <% end %>
   <%= f.submit "Manage Position(s)" %>
 <% end %>
+
+<hr>
+
+
+<!-- params if user already has a position/skill:
+<ActionController::Parameters {"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"EMWl09snJIwDQfTYoi8eMIpyYLbpjJbpEunbpBnNFuizVMCj+MgE9IAGp2wP27WLJFm4y1P4/TS1x6hQYKGs/g==", "user"=>{"positions_users"=>[{"position_id"=>"2", "skill_level"=>"4"}, {"skill_level"=>""}], "positions_users_attributes"=>{"0"=>{"id"=>"1"}}}, "commit"=>"Manage Position(s)", "controller"=>"users/position_management", "action"=>"update", "user_id"=>"1"} permitted: false> -->
