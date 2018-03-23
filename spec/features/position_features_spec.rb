@@ -6,6 +6,7 @@ RSpec.feature 'Users and Positions', type: :feature do
       user = create(:user)
 
       visit user_positions_path(user.id)
+
       expect(page.status_code).to eq(200)
     end
   end
@@ -16,6 +17,7 @@ RSpec.feature 'Users and Positions', type: :feature do
       signin(user.email, user.password)
 
       visit user_positions_path(user.id)
+
       expect(page).to have_link("Add Positions")
     end
 
@@ -25,6 +27,7 @@ RSpec.feature 'Users and Positions', type: :feature do
 
       visit user_positions_path(user.id)
       click_link("Add Positions")
+
       expect(page).to have_css("form#new_user_#{user.id}")
     end
 
@@ -69,8 +72,6 @@ RSpec.feature 'Users and Positions', type: :feature do
       position2 = create(:position)
       user = create(:user)
 
-      # PositionsUser.create(user_id: user.id, position_id: position1.id, skill_level: 3)
-      binding.pry
       signin(user.email, user.password)
       visit user_position_management_path(user.id)
 
@@ -78,30 +79,41 @@ RSpec.feature 'Users and Positions', type: :feature do
       expect(page).to have_content(position2.name)
     end
 
-    xscenario 'the form should indicate which position(s) are already listed in the user profile' do
+    scenario 'the form should display checkboxes for the existing positions in the db' do
       position1 = create(:position)
       position2 = create(:position)
       user = create(:user)
-      user.positions << position1
 
       signin(user.email, user.password)
-      visit edit_user_path(user.id)
+      visit user_position_management_path(user.id)
 
-      expect(page).to have_field("user_position_ids_#{position1.id}", checked: true)
-      expect(page).to have_field("user_position_ids_#{position2.id}", checked: false)
+      expect(page).to have_css("input[type=\"checkbox\"]", count: 2)
     end
 
-    xscenario 'the list of positions for a user should update after the form is submitted' do
+    scenario 'the form should indicate which position(s) are already listed in the user profile' do
       position1 = create(:position)
       position2 = create(:position)
       user = create(:user)
       user.positions << position1
 
       signin(user.email, user.password)
-      visit edit_user_path(user.id)
+      visit user_position_management_path(user.id)
+
+      expect(page).to have_field("position_#{position1.id}", checked: true)
+      expect(page).to have_field("position_#{position2.id}", checked: false)
+    end
+
+    scenario 'the list of positions for a user should update after the form is submitted' do
+      position1 = create(:position)
+      position2 = create(:position)
+      user = create(:user)
+      user.positions << position1
+
+      signin(user.email, user.password)
+      visit user_position_management_path(user.id)
 
       page.check(position2.name)
-      click_button("Update Position(s)")
+      click_button("Update User")
 
       expect(user.positions).to include(position1, position2)
     end
