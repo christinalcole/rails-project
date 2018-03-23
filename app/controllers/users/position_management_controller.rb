@@ -14,8 +14,6 @@ class Users::PositionManagementController < ApplicationController
   end
 
   def update
-    raise params.inspect
-    # binding.pry
     if current_user.update(user_position_params)
       redirect_to user_positions_path(current_user)
     else
@@ -25,8 +23,8 @@ class Users::PositionManagementController < ApplicationController
 
   private
   def user_position_params
-    params.require(:user).permit(:user_id, :position_ids[], positions_users_attributes: [:skill_level])
+    params.require(:user).permit(:user, positions_users_attributes: [:position_id, :skill_level])
   end
 end
 
-# <ActionController::Parameters {"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"0DGcIiju/zzDHvfNK1bfvUwJ+BU91Kn4a22HpR/qjPdzoPlSCwHfREBZpHmGonQG4iIgaIegwiXMQ/RRZoY24Q==", "user"=>{"positions_users"=>[{"position_id"=>"", "skill_level"=>""}, {"position_id"=>""}, {"position_id"=>"2", "skill_level"=>"1"}]}, "commit"=>"Manage Position(s)", "controller"=>"users/position_management", "action"=>"update", "user_id"=>"1"} permitted: false>
+{"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"7ygP/H3za91bM2UrP5TbeyN1EAhbPYCCCnvml14Yur5MuWqMXhxLpdh0Np+SYHDAjV7IdeFJ61+tVZVjJ3QAqA==", "user"=>{"positions_users_attributes"=>{"0"=>{"position_id"=>"1", "skill_level"=>"4"}, "1"=>{"skill_level"=>""}}}, "commit"=>"Update User", "controller"=>"users", "action"=>"update", "id"=>"1"}
