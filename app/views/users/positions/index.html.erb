@@ -3,11 +3,11 @@ user::positions#index
 
 <h2><%= current_user.name %>'s positions</h2>
 <ul>
-  <% current_user.positions.each do |position| %>
-    <li><%= position.name %> </li>
+  <% current_user.positions_users.each do |pu| %>
+    <li><%= pu.position.name %> with a skill level of <%= pu.skill_level %></li>
   <% end %>
 </ul>
 
 
-<%= link_to "Add Positions", new_user_position_path(current_user) %>
-<%= link_to "Manage Positions", edit_user_path(current_user) %>
+<%= link_to "Manage Positions", user_position_management_path(current_user) %>
+<!-- <%= link_to "Manage Positions", edit_user_path(current_user) %> -->
