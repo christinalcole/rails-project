@@ -10,10 +10,10 @@ user::position_management#edit
 <%= form_for current_user, url: user_position_management_path do |f| %>
   <% @positions.each do |position| %>
     <%= f.fields_for :positions_users, PositionsUser.new do |pu_fields| %>
-      <%= pu_fields.check_box :position_id, {id: "position_#{position.id}"}, position.id, nil %>
+      <%= pu_fields.check_box :position_id, {checked: current_user.has_positions?(position), id: "position_#{position.id}"}, position.id, nil %>
       <%= pu_fields.label :name, position.name, for: "position_#{position.id}" %>
-      <%= pu_fields.text_field :skill_level %><br>
+      <%= pu_fields.text_field :skill_level, value: current_user.has_positions?(position) ? current_user.skill_level(position) : '' %><br>
     <% end %>
   <% end %>
-  <%= f.submit %>
+  <%= f.submit "Manage Position(s)" %>
 <% end %>
