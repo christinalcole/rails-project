@@ -58,11 +58,12 @@ class User < ApplicationRecord
 
   def positions_users_attributes=(pu_attributes)
     pu_attributes.keep_if {|i, j| j[:position_id].to_i > 0}
-
+    self.positions_users.destroy_all
     pu_attributes.each do |i, attributes|
       # binding.pry
-      # self.positions_users.build(attributes)
-      self.positions_users.find_or_initialize_by(attributes).update(attributes)
+      self.positions_users.build(attributes)
+      # self.positions_users.find_or_initialize_by(attributes).update(attributes)
+      # self.positions_users.find_or_initialize_by(attributes).assign_attributes(attributes)
     end
   end
 
