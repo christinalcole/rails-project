@@ -55,4 +55,22 @@ class User < ApplicationRecord
   # def positions=(position)
   #   self.positions << Position.find_by(name: position[:name])
   # end
+
+  def positions_users_attributes=(pu_attributes)
+    pu_attributes.keep_if {|i, j| j[:position_id].to_i > 0}
+
+    pu_attributes.each do |i, attributes|
+      # binding.pry
+      # self.positions_users.build(attributes)
+      self.positions_users.find_or_initialize_by(attributes).update(attributes)
+    end
+  end
+
+  def has_positions?(position)
+    self.position_ids.include?(position.id)
+  end
+
+  def skill_level(position)
+    self.positions_users.where("position_id = ?", position.id).first.skill_level
+  end
 end
