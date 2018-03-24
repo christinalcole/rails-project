@@ -117,5 +117,20 @@ RSpec.feature 'Users and Positions', type: :feature do
 
       expect(user.positions).to include(position1, position2)
     end
+
+    scenario 'form submission updates an existing profile position and does not create a new one' do
+      position1 = create(:position)
+      user = create(:user)
+      user.positions_users << PositionsUser.create(user_id: user.id, position_id: position1.id, skill_level: 2)
+
+      signin(user.email, user.password)
+      visit user_position_management_path(user.id)
+      fill_in 'user[positions_users_attributes][0][skill_level]', with: 5
+      click_button("Manage Position(s)")
+
+      expect(user.positions.count).to eq(1)
+      expect(user.positions_users.count).to eq(1)
+      expect(user.positions_users.first.skill_level).to eq(5)
+    end
   end
 end
