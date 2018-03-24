@@ -6,13 +6,10 @@ user::positions#new
 
 <%= form_for current_user do |f| %>
   <%= f.fields_for :positions_users do |pu| %>
-      <%= pu.check_box :position_id, {id: "position_id#{pu.object.position.id}"}, pu.object.position.id, nil %>
-      <%= pu.label :name, pu.object.position.name %>
+      <%= check_box_tag "user[position_ids][]", :position_id, current_user.positions.include?(pu.object.position) %>
+      <%= pu.object.position.name %>
       <%= pu.label :skill_level %>
       <%= pu.number_field :skill_level %><br>
     <% end %>
   <%= f.submit "Add Position(s)" %>
 <% end %>
-
-
-<!-- need to remove checkboxes?  form class shows as edit, not new -->
