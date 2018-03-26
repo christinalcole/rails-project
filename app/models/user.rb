@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   has_many :race_crews, :foreign_key => "crew_id"
   has_many :races, through: :race_crews
-  has_many :race_positions, through: :race_crews, :foreign_key => "race_position_id"
+  has_many :race_positions, through: :race_crews, :foreign_key => "race_position_id" # << this is really referring to the position the user had in the crew for that race; race_crew only has belongs_to position
 
   validates :first_name, :last_name, :email, :phone_number, :weight, presence: true
 
