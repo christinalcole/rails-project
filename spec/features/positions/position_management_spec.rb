@@ -18,7 +18,7 @@ RSpec.feature 'Positions Management', type: :feature do
 
   context 'editing positions' do
     scenario 'an existing position can be updated' do
-      position = FactoryBot.create(:position, name: "gib trim")
+      position = create(:position, name: "gib trim")
 
       visit edit_position_path(position.id)
       expect(page).to have_css("form#edit_position_#{position.id}")
@@ -32,7 +32,7 @@ RSpec.feature 'Positions Management', type: :feature do
 
 
     scenario 'an existing position can be removed' do
-      position = FactoryBot.create(:position)
+      position = create(:position)
 
       visit positions_path
       click_link "Delete"
@@ -44,8 +44,8 @@ RSpec.feature 'Positions Management', type: :feature do
 
   context 'listing positions' do
     scenario 'existing positions in the database can be listed' do
-      position1 = FactoryBot.create(:position)
-      position2 = FactoryBot.create(:position)
+      position1 = create(:position)
+      position2 = create(:position)
 
       visit positions_path
       expect(page).to have_content("#{position1.name}")

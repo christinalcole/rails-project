@@ -73,7 +73,7 @@ RSpec.feature 'Boats Management', type: :feature do
   context 'editing boats' do
     scenario 'an existing boat can be updated' do
       user = create(:user)
-      boat = FactoryBot.create(:boat, name: "Feelin Good", owner_id: user.id)
+      boat = create(:boat, name: "Feelin Good", owner_id: user.id)
       signin(user.email, user.password)
       visit edit_user_boat_path(user.id, boat.id)
 
@@ -88,7 +88,7 @@ RSpec.feature 'Boats Management', type: :feature do
 
     scenario 'an existing boat can be removed' do
       user = create(:user)
-      boat = FactoryBot.create(:boat, owner_id: user.id)
+      boat = create(:boat, owner_id: user.id)
       signin(user.email, user.password)
 
       visit user_boats_path(user.id)
@@ -101,8 +101,8 @@ RSpec.feature 'Boats Management', type: :feature do
 
   context 'listing boats' do
     scenario 'existing boats in the database can be listed' do
-      boat1 = FactoryBot.create(:boat)
-      boat2 = FactoryBot.create(:boat)
+      boat1 = create(:boat)
+      boat2 = create(:boat)
 
       visit boats_path
       expect(page).to have_content("#{boat1.name}")
