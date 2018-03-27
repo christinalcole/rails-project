@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :regatta do
     name        Faker::Coffee.variety
     start_date  Date.today

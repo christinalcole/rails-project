@@ -1,6 +1,6 @@
 require 'faker'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :boat do
     association :owner, factory: :user, strategy: :build
     name    Faker::Ancient.god

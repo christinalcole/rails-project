@@ -58,7 +58,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # support for factory_girl_rails
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # support for database_cleaner
   config.before(:suite) do
