@@ -3,3 +3,6 @@
 <% @positions.each do |position| %>
   <%= position.name %> | <%= link_to "Edit", edit_position_path(position.id) %> | <%= link_to "Delete", position, method: :delete, data:{confirm: "Are you sure?"} %>
 <% end %>
+<br><br><br>
+
+<%= link_to "Add position", new_position_path %>

@@ -1,6 +1,10 @@
 <% if user_signed_in? %>
   <ul>
-    <li><%= link_to "Crew Positions", user_positions_path(current_user) %></li>
+    <li><%= link_to "Profile Positions Management", user_positions_path(current_user) %></li>
     <li><%= link_to "Boat Management", user_boats_path(current_user) %></li>
+    <hr>
+    Admin menu
+    <li><%= link_to "Positions Management", positions_path %></li>
+    <li><%= link_to "Boats Management", boats_path %></li>
   </ul>
 <% end %>
