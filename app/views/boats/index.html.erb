@@ -1,0 +1,9 @@
+boats#index
+
+<h1>Boats registered in the database:</h1>
+
+<ul>
+  <%= @boats.each do |boat| %>
+    <li><%= boat.name %></li>
+  <% end %>
+</ul>
